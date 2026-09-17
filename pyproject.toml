@@ -1,0 +1,77 @@
+[project]
+name = "lerobot_policy_griffin_alpha"
+version = "1.0.0"
+description = "Griffin Alpha-S: a Qwen3-VL-4B vision-language-action policy plugin for LeRobot (flow-matching and FAST heads)"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.12"
+authors = [{ name = "Griffin Labs" }]
+keywords = ["robotics", "vla", "lerobot", "qwen3-vl", "flow-matching"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    # LeRobot supplies the policy/processor framework and the training/eval CLIs. The plugin is
+    # auto-discovered by lerobot because this distribution's name starts with `lerobot_policy_`
+    # and matches the import name — keep the two identical.
+    "lerobot[dataset]==0.6.1",
+    # The flow-matching head reaches into transformers' Qwen3-VL internals (decoder layer, RMSNorm,
+    # rotary helpers, the attention-function registries) to build its expert and to capture the
+    # backbone's per-layer K/V. Those are private APIs, so the ceiling is tight; lerobot 0.6.1 caps
+    # at <5.6 as well.
+    "transformers>=5.5.4,<5.6",
+    "torch>=2.7,<2.12",
+    "torchvision",
+    "numpy",
+    "scipy",
+    "pillow",
+    "safetensors",
+    "tqdm",
+]
+
+[project.urls]
+Homepage = "https://github.com/griffinlabs-ai/alpha-s"
+Models = "https://huggingface.co/griffinlabs/Griffin-Alpha-S"
+
+[project.optional-dependencies]
+# Closed-loop LIBERO evaluation (examples/libero): robosuite / MuJoCo / LIBERO through lerobot.
+# See docs/libero_eval.md for the two install gotchas (egl_probe build, LIBERO first-import prompt).
+libero = [
+    "lerobot[libero,evaluation]==0.6.1",
+    "einops",
+]
+# Fine-tuning with `lerobot-train` (accelerate and friends live behind lerobot's own `training` extra).
+train = [
+    "lerobot[training]==0.6.1",
+]
+test = [
+    "pytest>=8",
+]
+# FlashAttention 2 for the Qwen3-VL backbone. An extra rather than a hard dependency: flash-attn
+# ships no wheel for every torch/CUDA pair, needs an Ampere-or-newer GPU, and is useless on CPU.
+# The policy *requests* FA2 and falls back to SDPA with a warning when it is absent (set
+# `require_attn_implementation=true` on a training job to fail loudly instead).
+#
+# Prefer an official prebuilt wheel over building from source; pick the one whose tags
+# (cuXX / torchX.Y / cpXYZ / cxx11abi) match your environment exactly, e.g.
+#     pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3.post1/flash_attn-2.8.3%2Bcu13torch2.9cxx11abiTRUE-cp312-cp312-linux_x86_64.whl
+# Building from source needs a CUDA toolkit (nvcc) and no build isolation:
+#     pip install -e '.[flash]' --no-build-isolation
+flash = [
+    "flash-attn>=2.6",
+]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "tests"]
+testpaths = ["tests"]
+addopts = "-v"

@@ -1,0 +1,18 @@
+Griffin Alpha-S
+Copyright 2026 Griffin Labs
+
+This product includes software developed at Griffin Labs (https://github.com/griffinlabs-ai).
+
+The code in this repository is licensed under the Apache License, Version 2.0 (see LICENSE).
+The released model weights (https://huggingface.co/griffinlabs/Griffin-Alpha-S and
+https://huggingface.co/griffinlabs/Griffin-Alpha-S-LIBERO) are licensed separately under
+CC BY-NC-SA 4.0; see the LICENSE file in each model repository.
+
+Third-party components this code builds on (each under its own license, none redistributed here):
+  - LeRobot (Hugging Face) -- Apache License 2.0. The relative-action processor steps, the policy
+    and processor framework, and the flow-matching schedule constants follow LeRobot's pi0.5
+    implementation.
+  - Transformers (Hugging Face) -- Apache License 2.0. The Qwen3-VL model implementation.
+  - Qwen3-VL-4B-Instruct (Alibaba Cloud) -- Apache License 2.0. The base vision-language model.
+  - FAST action tokenizer (lerobot/fast-action-tokenizer, Physical Intelligence / Hugging Face) --
+    Apache License 2.0.
