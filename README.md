@@ -8,7 +8,7 @@ recipe.
 
 | 📝 Blog | 🤗 Hugging Face |
 |:---:|:---:|
-| [Read the Announcement](https://griffinlabs.ai/blog/griffin-alpha-s) | [Access Models & Datasets](https://huggingface.co/collections/griffinlabs/alpha-s) |
+| [Read the Blog](https://griffinlabs.ai/blog/griffin-alpha-s) | [Access Models & Datasets](https://huggingface.co/collections/griffinlabs/alpha-s) |
 
 Two heads ship, as two LeRobot policy types selected by a checkpoint's `config.json`:
 
