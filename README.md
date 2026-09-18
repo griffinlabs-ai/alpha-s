@@ -1,6 +1,6 @@
 # Griffin Alpha-S
 
-Griffin Alpha-S is a vision-language-action (VLA) model by [Griffin Labs](https://github.com/griffinlabs-ai):
+Griffin Alpha-S is a vision-language-action (VLA) model by [Griffin Labs](https://griffinlabs.ai):
 a Qwen3-VL-4B backbone extended with a robot-action head and pre-trained on a multi-embodiment
 mixture of robot data. This repository is the [LeRobot](https://github.com/huggingface/lerobot)
 policy plugin that runs, evaluates and fine-tunes the released weights, plus the LIBERO evaluation
