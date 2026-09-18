@@ -6,6 +6,10 @@ mixture of robot data. This repository is the [LeRobot](https://github.com/huggi
 policy plugin that runs, evaluates and fine-tunes the released weights, plus the LIBERO evaluation
 recipe.
 
+| 📝 Blog | 🤗 Hugging Face |
+|:---:|:---:|
+| [Read the Announcement](https://griffinlabs.ai/blog/griffin-alpha-s) | [Access Models & Datasets](https://huggingface.co/collections/griffinlabs/alpha-s) |
+
 Two heads ship, as two LeRobot policy types selected by a checkpoint's `config.json`:
 
 | policy type | head | class |
